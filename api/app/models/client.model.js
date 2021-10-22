@@ -14,12 +14,12 @@ Client.create = (newCustomer, result) => {
     sql.execute("CALL RegisterUser(?,?,?,?,?,?)", [newCustomer.name, newCustomer.address,newCustomer.phoneNumber,newCustomer.email, newCustomer.password,newCustomer.enterpriseName], (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
+        result(err, null);     
         return;
       }
   
       console.log("created customer: ", { id: res.insertId, ...newCustomer });
-      result(null, { id: res.insertId, ...newCustomer });
+      result(null, { id: res.insertId, ...newCustomer });     
     });
 };
 module.exports = Client;

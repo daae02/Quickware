@@ -1,4 +1,8 @@
+
+use quickwaredb;
 DELIMITER //
+ 
+ 
 CREATE PROCEDURE RegisterUser(
 	IN pName NVARCHAR(100),
     IN pAddress NVARCHAR(500),
