@@ -1,18 +1,11 @@
-
 use quickwaredb;
 DELIMITER //
  
- 
-CREATE PROCEDURE RegisterUser(
-	IN pName NVARCHAR(100),
-    IN pAddress NVARCHAR(500),
-    IN pPhoneNumber VARCHAR(12),
-    IN pEmail VARCHAR(300),
-    IN pPassword NVARCHAR(13),
-    IN pEnterpriseName NVARCHAR(100)
+ CREATE PROCEDURE LogIn(
+    IN pEmail NVARCHAR(500),
+    IN pPassword NVARCHAR(13)
 )
 BEGIN
-	DECLARE MailInUSe INT DEFAULT(53000);
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
 		GET DIAGNOSTICS CONDITION 1 @err_no = MYSQL_ERRNO, @message = MESSAGE_TEXT;
@@ -28,15 +21,15 @@ BEGIN
         END IF;
         RESIGNAL SET MESSAGE_TEXT = @message;
 	END;
-	SELECT COUNT(*) INTO @emailRegisted FROM Clients WHERE email = pEmail ;
-    IF  (@emailRegisted != 0)
-    THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El email ya esta en uso', MYSQL_ERRNO = MailInUSe;
-	END IF;
-    
+    SELECT Name, PhoneNumber, Email, EnterpriseName FROM Clients WHERE Password = SHA(CONCAT(pPassword,pEmail));
     START TRANSACTION;
-		INSERT INTO Clients  (Name, Address, PhoneNumber, Email, Password, creationDate, EnterpriseName)
-        VALUES (pName,  pAddress, pPhoneNumber, pEmail, SHA(CONCAT(pPassword,pEmail)), SYSDATE(), pEnterpriseName);
-	COMMIT;
+		IF (select @@sql_safe_updates = 1)
+		THEN
+			SET SQL_SAFE_UPDATES = 0;
+		END IF;
+		UPDATE Clients 
+        SET Clients.Online = 1
+        WHERE Password = SHA(CONCAT(pPassword,pEmail));
+    COMMIT;
 END//
 DELIMITER ;

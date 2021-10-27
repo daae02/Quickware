@@ -18,7 +18,7 @@ module.exports = app => {
 
     // Create a new Customer
     app.post("/createClient", client.create);
-
+    app.post("/logIn", client.logIn);
     app.get('/productos',client.find);
     
     

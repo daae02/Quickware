@@ -7,7 +7,6 @@ exports.create = (req, res) => {
         message: "Content can not be empty!"
       });
     }
-    console.log("Creating");
     // Create a Customer
     const client = new Client({
         name: req.body.name,
@@ -39,4 +38,18 @@ exports.create = (req, res) => {
       else res.send(data);
     });
   };
-  
+  exports.logIn = (req, res) => {
+    if (!req.body) {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+    }
+    Client.logIn(req.body.email,req.body.password,(err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while find clients."
+        });
+      else res.send(data);
+    });
+  };

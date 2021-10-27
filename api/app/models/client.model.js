@@ -22,7 +22,18 @@ Client.create = (newCustomer, result) => {
       result(null, { id: res.insertId, ...newCustomer });     
     });
 };
-
+Client.logIn = (email,pass, result) => {
+    console.log(email,pass)
+    sql.execute("CALL logIn(?,?)",[email, pass], (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);     
+        return;
+      }
+      console.log(res);
+      result(null,res[0]);  
+    });
+};
 Client.find = (reque, result) => {
   sql.query('SELECT * FROM `Clients`',function (err, results, fields) {
     // error will be an Error if one occurred during the query

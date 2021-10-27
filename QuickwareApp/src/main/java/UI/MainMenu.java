@@ -36,6 +36,11 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnPedidos.setText("Pedidos");
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
 
         btnRepartidores.setText("Repartidores");
         btnRepartidores.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +92,10 @@ public class MainMenu extends javax.swing.JFrame {
     private void btnRepartidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepartidoresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRepartidoresActionPerformed
+
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPedidosActionPerformed
 
     /**
      * @param args the command line arguments

@@ -178,6 +178,7 @@ var cardTemplate = Handlebars.compile($("#card-template").html());
 // cards
 $.getJSON('http://localhost:3000/productos', function(data) {     
         var cards = data;
+        console.log(data)
         $.each(cards, function(index, card) {  
             $(".cards").append(cardTemplate(card)); 
         });
