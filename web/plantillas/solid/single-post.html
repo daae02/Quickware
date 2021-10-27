@@ -357,9 +357,8 @@
           show_msj();
         },
         error: function (xhr, ajaxOptions, thrownError) {          
-          chek = 0; 
-          alert(xhr.status);
-          alert(thrownError);    
+          chek = 0;                  
+          alert(xhr.responseJSON.message);    
         },
         contentType: "application/json",
         dataType: 'json'
