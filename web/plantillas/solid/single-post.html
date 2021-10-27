@@ -24,7 +24,7 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
-  <script type="text/javascript" src="C:\Users\Leonardo\Desktop\plantillas\solid\lib\sweetalert2-11.1.9\package\dist\sweetalert2.all.min.js" >  
+  <script type="text/javascript" src="lib\sweetalert2-11.1.9\package\dist\sweetalert2.all.min.js" >  
   </script>
   <!-- =======================================================
     Template Name: Solid
@@ -92,11 +92,8 @@
         
       <form id="form1"
             class="contact-form"
-            accept-charset="UTF-8"            
-            action = "http://localhost:3000/createClient/"
-            target="_blank"
-            method="post"
-            onsubmit="return checkin()">
+            accept-charset="UTF-8"    
+            onsubmit="return checkin();">
 
 
             <div class="form-group">
@@ -316,13 +313,60 @@
 </body>
 
 
-<script type="text/javascript" >
-  function checkin(){   
-      Swal.fire('¡Registrado!');     
 
-      setTimeout(function(){
-          window.close();
-      },10); //Dejara un tiempo de 3 seg para que el usuario vea que se envio el formulario correctamente
+<script type="text/javascript" >
+  function show_msj(){
+    Swal.fire({
+        title: '¿Quieres Registrarte?',
+        showCancelButton: false,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        denyButtonText: 'No',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Registrado!', '', '')
+          document.getElementById('name').value = "";
+          document.getElementById('address').value = "";
+          document.getElementById('phoneNumber').value = "";
+          document.getElementById('email').value = "";          
+          document.getElementById('password').value = "";
+          document.getElementById('client-ver-contra').value = "";
+          document.getElementById('enterpriseName').value = "";
+        } else if (result.isDenied) {
+          Swal.fire('No registrado!', '', '')
+        }
+      });
+  }
+  function checkin(){   
+    var chek = 0;   
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/createClient/',
+        data: JSON.stringify (
+          {
+            name : document.getElementById('name').value,
+            address: document.getElementById('address').value,
+            phoneNumber :  document.getElementById('phoneNumber').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            enterpriseName: document.getElementById('enterpriseName').value,
+          }),
+        success: function (response) {
+          chek = 1;
+          show_msj();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {          
+          chek = 0; 
+          alert(xhr.status);
+          alert(thrownError);    
+        },
+        contentType: "application/json",
+        dataType: 'json'
+      });
+      if (chek == 0){
+        return false;
+      }
       return true;
 
   }

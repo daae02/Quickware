@@ -41,7 +41,7 @@
 
 <body>
 
-  <!-- Fixed navbar -->
+   
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -67,25 +67,18 @@
           </li>
         </ul>
       </div>
-      <!--/.nav-collapse -->
     </div>
   </div>
 
-  <!-- *****************************************************************************************************************
-	 BLUE WRAP
-	 ***************************************************************************************************************** -->
-  <div id="blue">
+   <div id="blue">
     <div class="container">
       <div class="row">
         <h3>Nuestros Productos</h3>
       </div>
-      <!-- /row -->
     </div>
-    <!-- /container -->
   </div>
-  <!-- /blue -->
 
-  <!-- *****************************************************************************************************************
+   <!--*****************************************************************************************************************
 	 Productos
     <script type="text/template" id="card-template">   
     <div class="container mtb">
@@ -113,8 +106,8 @@
     </div> 
     </script>
 	 ***************************************************************************************************************** -->
-
-   <div class="container mtb">
+   
+  <div class="container mtb">
     <div class="row centered">
       <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="he-wrap tpl6">
@@ -122,7 +115,7 @@
           <div class="he-view">
             <div class="bg a0" data-animate="fadeIn">
               <h3 class="a1" data-animate="fadeInDown">Martillo</h3>
-              <a href="#" class="dmbutton a2" data-animate="fadeInUp"><i>+</i></a>
+              <a href="#" class="dmbutton a2" onclick="return false;" data-animate="fadeInUp"><i>+</i></a>
               <a href="#" class="dmbutton a2" data-animate="fadeInUp"><i>-</i></a>
             </div>
           </div>
@@ -131,32 +124,68 @@
         <h5 class="ctitle">Made in china</h5>
         <p>25% de descuento</p>
         <div class="hline"></div>
-      </div>          
-      
-    </div>
+      </div>   
+    
+    <template id="template1">
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="he-wrap tpl6">
+              <img src="https://cr.epaenlinea.com/pub/media/version20200605/catalog/product/cache/a83b746ef25730b9cb1cc414bac0f04a/1/2/1246118_3.jpg" alt="">
+              <div class="he-view">
+                <div class="bg a0" data-animate="fadeIn">
+                  <h3 class="a1" data-animate="fadeInDown">lo {{Name}}</h3>
+                  <a href="#" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-envelope"></i></a>
+                  <a href="#" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-twitter"></i></a>
+                </div>
+              </div>
+            </div>
+            <h4>lo {{Address}}</h4>
+            <h5 class="ctitle">lo {{PhoneNumber}}</h5>
+            <p>lo {{PhoneNumber}}</p>
+            <div class="hline"></div>
+          </div>         
+    </template>
+  </div>
+</div>
   </div> 
 
     
-  <script type="text/template" id="card-template">   
-  
+
+
+  <!--
+  <script type="text/template" id="template1"> 
+    <p>
+
+      <b>Nombre</b>: <span></span><br>
+
+      <b>Género</b>: <span></span><br>
+
+      <b>Edad</b>: <span></span>
+
+    </p>
+  </script>
+
+     
+    <div class="container mtb">
+      <div class="row centered">
         <div class="col-lg-3 col-md-3 col-sm-3">
           <div class="he-wrap tpl6">
-            <img src="img/team/team01.jpg" alt="">
+            <img src="https://cr.epaenlinea.com/pub/media/version20200605/catalog/product/cache/a83b746ef25730b9cb1cc414bac0f04a/1/2/1246118_3.jpg" alt="">
             <div class="he-view">
               <div class="bg a0" data-animate="fadeIn">
-                <h3 class="a1" data-animate="fadeInDown">name</h3>
+                <h3 class="a1" data-animate="fadeInDown">lo {{Name}}</h3>
                 <a href="#" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-envelope"></i></a>
                 <a href="#" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-twitter"></i></a>
               </div>
             </div>
           </div>
-          <h4>address</h4>
-          <h5 class="ctitle">phoneNumber</h5>
-          <p>phoneNumber</p>
+          <h4>lo {{Address}}</h4>
+          <h5 class="ctitle">lo {{PhoneNumber}}</h5>
+          <p>lo {{PhoneNumber}}</p>
           <div class="hline"></div>
-        </div>  
-    </script>
-
+        </div>          
+        
+      </div>
+    </div> --> 
 
 <script type="text/javascript">//<![CDATA[
 
@@ -173,18 +202,28 @@ Handlebars.registerHelper('diamondRating', function(rating, outOf) {
 });
 
 // load card template
-var cardTemplate = Handlebars.compile($("#card-template").html());
+var cardTemplate = Handlebars.compile($("#template1").html());
 
 // cards
 $.getJSON('http://localhost:3000/productos', function(data) {     
         var cards = data;
         $.each(cards, function(index, card) {  
+            console.log(card);
+            var plantilla = document.getElementById('template1');
+            clone = plantilla.content.cloneNode(true);
+            fields = clone.querySelectorAll('h3');
+            fields[0].textContent = card.Name;
+            fields = clone.querySelectorAll('h4');
+            fields[0].textContent = card.Name;
+            fields = clone.querySelectorAll('h5');
+            fields[0].textContent = card.Name;
+            plantilla.parentNode.appendChild(clone);
+            
             $(".cards").append(cardTemplate(card)); 
         });
     });
 
 </script>
-
 
 
   <!-- *****************************************************************************************************************
@@ -228,9 +267,6 @@ $.getJSON('http://localhost:3000/productos', function(data) {
       </p>
     </div>
   </div>
-  <!-- / copyrights -->
-
-  <!-- JavaScript Libraries -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="lib/php-mail-form/validate.js"></script>
@@ -239,7 +275,6 @@ $.getJSON('http://localhost:3000/productos', function(data) {
   <script src="lib/hover/hoverdir.js"></script>
   <script src="lib/hover/hoverex.min.js"></script>
 
-  <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
 
 </body>
