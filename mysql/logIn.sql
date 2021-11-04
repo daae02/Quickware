@@ -1,7 +1,4 @@
-use quickwaredb;
-DELIMITER //
- 
- CREATE PROCEDURE LogIn(
+CREATE DEFINER=`root`@`%` PROCEDURE `LogIn`(
     IN pEmail NVARCHAR(500),
     IN pPassword NVARCHAR(13)
 )
@@ -29,7 +26,6 @@ BEGIN
 		END IF;
 		UPDATE Clients 
         SET Clients.Online = 1
-        WHERE Password = SHA(CONCAT(pPassword,pEmail));
+        WHERE Password = SHA(CONCAT(pPassword,",",pEmail));
     COMMIT;
-END//
-DELIMITER ;
+END
