@@ -8,6 +8,7 @@ const Client = function(customer) {
   this.email = customer.email;
   this.password = customer.password;
   this.enterpriseName = customer.enterpriseName;
+  this.Online = customer.Online;
 };
 
 Client.create = (newCustomer, result) => {
