@@ -3,6 +3,7 @@ const app = express();
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
 require("./app/routes/client.routes.js")(app);
+require("./app/routes/dealers.routes.js")(app);
 // simple route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to Quickwares's api." });

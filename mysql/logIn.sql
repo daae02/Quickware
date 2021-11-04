@@ -21,7 +21,7 @@ BEGIN
         END IF;
         RESIGNAL SET MESSAGE_TEXT = @message;
 	END;
-    SELECT Name, PhoneNumber, Email, EnterpriseName FROM Clients WHERE Password = SHA(CONCAT(pPassword,pEmail));
+    SELECT Name, PhoneNumber, Email, EnterpriseName FROM Clients WHERE Password = SHA(CONCAT(pPassword,",",pEmail));
     START TRANSACTION;
 		IF (select @@sql_safe_updates = 1)
 		THEN
