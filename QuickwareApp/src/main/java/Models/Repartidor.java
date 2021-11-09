@@ -15,20 +15,29 @@ public class Repartidor {
     public final  String email;
     public final String vehicleId;
     public final String phoneNumber;
-    public final String newPass;
+    public final String password;
     
     public Repartidor(
             @JsonProperty("DealerId") Integer dealerId,
             @JsonProperty("Name") String name,
             @JsonProperty("Email") String email,
             @JsonProperty("PhoneNumber") String vehicleId,
-            @JsonProperty("VehicleId") String phoneNumber       
+            @JsonProperty("VehicleId") String phoneNumber
     ){
         this.id = dealerId;
         this.name = name;
         this.email = email;
         this.vehicleId = vehicleId;
         this.phoneNumber = phoneNumber;
-        this.newPass = "";
+        this.password = "";
+    }
+
+    public Repartidor(String name, String email, String vehicleId, String phoneNumber, String password) {
+        this.id = 0;
+        this.name = name;
+        this.email = email;
+        this.vehicleId = vehicleId;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 }
