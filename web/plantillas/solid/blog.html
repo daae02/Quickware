@@ -303,6 +303,41 @@
         });
     }
     function inicio_ses(){   
+
+    var email1 = document.getElementById('email').value;
+    var password1 = document.getElementById('password').value;
+    
+    if(email1=="" |password1==""){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡No se llenaron todos los campos!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }
+
+    //Mínimo ocho y máximo 10 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial:
+    if (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$/.test(password1) == false){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡Contraseña no valida!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }
+
+    if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(email1) == false){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡Dirección de correo no valida!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }    
+
       var chek = 0;   
         $.ajax({
           type: 'POST',
@@ -328,6 +363,10 @@
         if (chek == 0){
           return false;
         }
+        sessionStorage.setItem('store_email', email1);
+        //MínimosessionStorage.getItem('store_email');
+        //document.getElementById("Button").disabled = true;
+        
         return true;
   
     }

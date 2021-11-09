@@ -105,9 +105,11 @@
               <div class="validate"></div>
             </div>
             <div class="form-group">
-              <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+              <input type="text" name="prefix" class="form-control" id="prefix" placeholder="Prefijo">
+              <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Celular">
               <div class="validate"></div>
             </div>
+            
             <div class="form-group">
               <input type="text" name="address" class="form-control" id="address" placeholder="Dirección de entrega" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
               <div class="validate"></div>
@@ -117,7 +119,7 @@
               <div class="validate"></div>
             </div>
             <div class="form-group">
-              <input type="password" name="subject" class="form-control" id="client-ver-contra" placeholder="Verificación Contraseña" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+              <input type="password" name="password-ver" class="form-control" id="password-ver" placeholder="Verificación Contraseña" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
               <div class="validate"></div>
             </div>            
             <div class="form-group">
@@ -328,10 +330,11 @@
           Swal.fire('Registrado!', '', '')
           document.getElementById('name').value = "";
           document.getElementById('address').value = "";
+          document.getElementById('prefix').value = "";
           document.getElementById('phoneNumber').value = "";
           document.getElementById('email').value = "";          
           document.getElementById('password').value = "";
-          document.getElementById('client-ver-contra').value = "";
+          document.getElementById('password-ver').value = "";
           document.getElementById('enterpriseName').value = "";
         } else if (result.isDenied) {
           Swal.fire('No registrado!', '', '')
@@ -339,6 +342,75 @@
       });
   }
   function checkin(){   
+    var name1 = document.getElementById('name').value;
+    var address1 = document.getElementById('address').value;
+    var prefix1 = document.getElementById('prefix').value;
+    var phoneNumber1 =  document.getElementById('phoneNumber').value;
+    var email1 = document.getElementById('email').value;
+    var password1 = document.getElementById('password').value;
+    var password2 = document.getElementById('password-ver').value;
+    var enterpriseName1 = document.getElementById('enterpriseName').value;
+    
+    if(name1=="" | address1=="" |prefix1=="" |phoneNumber1=="" |email1=="" |password1=="" |password2=="" |enterpriseName1==""){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡No se llenaron todos los campos!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }
+
+    //Mínimo ocho y máximo 10 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial:
+    if (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$/.test(password1) == false){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡Contraseña no valida!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }
+
+    if (password1 != password2){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡Verificación de contraseña no coincide!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }
+
+    if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(email1) == false){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡Dirección de correo no valida!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }
+    if (/^\+[1-9]{1}[0-9]{0,6}$/.test(prefix1) == false){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡Prefijo celular no valido!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }
+    if (/^[1-9]{1}[0-9]{3,14}$/.test(phoneNumber1) == false){
+      Swal.fire({
+      icon: 'error',
+      title: 'ERROR',
+      text: '¡Número celular no valido!',
+      footer: '<a href="">¿Por que tengo este problema?</a>'
+      })
+      return false;
+    }
+    
+
     var chek = 0;   
       $.ajax({
         type: 'POST',

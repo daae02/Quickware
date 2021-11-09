@@ -1,3 +1,5 @@
+use quickwaredb;
+DELIMITER //
 CREATE DEFINER=`root`@`%` PROCEDURE `LogIn`(
     IN pEmail NVARCHAR(500),
     IN pPassword NVARCHAR(13)
@@ -28,4 +30,5 @@ BEGIN
         SET Clients.Online = 1
         WHERE Password = SHA(CONCAT(pPassword,",",pEmail));
     COMMIT;
-END
+END//
+DELIMITER ;

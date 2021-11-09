@@ -36,7 +36,7 @@ Client.logIn = (email,pass, result) => {
     });
 };
 Client.find = (reque, result) => {
-  sql.query('SELECT * FROM `Clients`',function (err, results, fields) {
+  sql.query('SELECT * FROM `Products` WHERE AvailableQuantity > 0',function (err, results, fields) {
     // error will be an Error if one occurred during the query
     // results will contain the results of the query
     // fields will contain information about the returned results fields (if any)
