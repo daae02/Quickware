@@ -46,21 +46,22 @@ exports.create = (req, res) => {
       });
     }
     // Create a Customer
+    console.log(req.body);
     const dealer = new Dealer({
         name: req.body.name,
         phoneNumber: req.body.phoneNumber,
         email: req.body.email, 
         password: req.body.password,   
-        vehicle: req.body.vehicleId
+        vehicleId: req.body.vehicleId
     });
-    console.log("Created");
-    Client.create(client, (err, data) => {
+    
+    Dealer.create(dealer, (err, data) => {
       if (err)
         res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Customer."
+          message: err.message || "Some error occurred while creating the Customer.",
+          code: err.sqlState
         });
-      else res.send(data);
+      else res.send({message:"Inserted", code: 0});
     });
   };
 /*
