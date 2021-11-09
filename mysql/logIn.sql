@@ -1,4 +1,5 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `LogIn`(
+DELIMITER //
+CREATE PROCEDURE `LogIn`(
     IN pEmail NVARCHAR(500),
     IN pPassword NVARCHAR(13)
 )
@@ -29,3 +30,4 @@ BEGIN
         WHERE Password = SHA(CONCAT(pPassword,",",pEmail));
     COMMIT;
 END
+DELIMITER ;
