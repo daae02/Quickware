@@ -4,6 +4,37 @@
 * Author: TemplateMag.com
 * License: https://templatemag.com/license/
 */
+.my-fixed-item {
+    position: fixed;
+    min-height: 140px;
+    width: 140px;
+    text-align: center;	
+	background-color: #a4f9ff;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+	width: 20px;
+  }
+  
+  ::-webkit-scrollbar-track {
+	background-color: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	background-color: #64b4ff;
+	border-radius: 20px;
+	border: 6px solid transparent;
+	background-clip: content-box;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+	background-color: #3c48f1;
+	
+  }
+
+
+
 
 /*	################################################################
 	1. GENERAL STRUCTURES

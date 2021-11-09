@@ -88,11 +88,8 @@
         
       <form id="form1"
             class="contact-form"
-            accept-charset="UTF-8"            
-            action = "http://localhost:3000/IniciarSesión/"
-            target="_blank"
-            method="post"
-            onsubmit="return checkin()">
+            accept-charset="UTF-8" 
+            onsubmit="return inicio_ses()">
 
             <div class="form-group">
               <input type="email" name="email" class="form-control" id="email" placeholder="Correo electrónico" data-rule="email" data-msg="Please enter a valid email">
@@ -283,5 +280,57 @@
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
 
+
+
+  
+  <script type="text/javascript" >
+    function show_msj2(){
+      Swal.fire({
+          title: '¿Quieres Registrarte?',
+          showCancelButton: false,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No',
+          denyButtonText: 'No',
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            Swal.fire('Inicio Sesión!', '', '')
+            document.getElementById('name').value = "";    
+            document.getElementById('password').value = "";
+          } else if (result.isDenied) {
+            Swal.fire('No Inicio Sesión!', '', '')
+          }
+        });
+    }
+    function inicio_ses(){   
+      var chek = 0;   
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:3000/logIn',
+          data: JSON.stringify (
+            {      
+              name : document.getElementById('name').value,
+              PhoneNumber: document.getElementById('PhoneNumber').value,
+              Email: document.getElementById('Email').value,
+              EnterpriseName: document.getElementById('EnterpriseName').value
+            }),
+          success: function (response) {
+            chek = 1;
+            show_msj2();
+          },
+          error: function (xhr, ajaxOptions, thrownError) {          
+            chek = 0;                  
+            alert(xhr.responseJSON.message);    
+          },
+          contentType: "application/json",
+          dataType: 'json'
+        });
+        if (chek == 0){
+          return false;
+        }
+        return true;
+  
+    }
+  </script>
 </body>
 </html>
