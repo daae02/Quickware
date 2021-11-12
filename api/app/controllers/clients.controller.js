@@ -38,6 +38,7 @@ exports.create = (req, res) => {
       else res.send(data);
     });
   };
+
   exports.logIn = (req, res) => {
     if (!req.body) {
       res.status(400).send({
@@ -45,6 +46,22 @@ exports.create = (req, res) => {
       });
     }
     Client.logIn(req.body.email,req.body.password,(err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while find clients."
+        });
+      else res.send(data);
+    });
+  };
+
+  exports.findOrders = (req, res) => {    
+    if (!req.body) {
+      res.status(400).send({
+        message: "¡No a hay sesión abierta!"
+      });
+    }
+    Client.findOrders(req.params.email, (err, data) => {
       if (err)
         res.status(500).send({
           message:

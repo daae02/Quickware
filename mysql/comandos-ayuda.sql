@@ -30,17 +30,68 @@ VALUES
 	(161, 4, 1),(162, 3, 1),(163, 2, 1),(164, 1, 1),(165, 5, 1);
  
    
-SELECT ord.OrderId,prod.ProductId,proper.Quantity,prod.UnityPrice,prod.Title,prod.PictureURL FROM `Orders` as ord 
+INSERT INTO 
+	`Orders`(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice, Checksum)
+VALUES   
+	(7, 2, NOW(), DATE_ADD(NOW(), INTERVAL (RAND()*(10-3)+3) DAY), RAND()*(1000-3)+3,  MD5(CONCAT(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice)));
+
+select * from `OrderHistories`;  
+INSERT INTO 
+	`OrderHistories`(OrderId, Datetime, HistoryPrice, OrderHistoriescol)
+VALUES   
+	(2, NOW(), RAND()*(1000-3)+3,  "LOL");
+    
+select * from `ProductsPerOrderHistory`;  
+INSERT INTO 
+	`ProductsPerOrderHistory`(ProductId, Quantity, OrderHistoryId)
+VALUES   
+	(161, 1, 2),(162, 2, 2),(163, 3, 2),(164, 4, 2),(165, 5, 2);   
+   
+   
+INSERT INTO 
+	`Orders`(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice, Checksum)
+VALUES   
+	(7, 3, NOW(), DATE_ADD(NOW(), INTERVAL (RAND()*(10-3)+3) DAY), RAND()*(1000-3)+3,  MD5(CONCAT(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice)));
+
+select * from `OrderHistories`;  
+INSERT INTO 
+	`OrderHistories`(OrderId, Datetime, HistoryPrice, OrderHistoriescol)
+VALUES   
+	(3, NOW(), RAND()*(1000-3)+3,  "LOL");
+    
+select * from `ProductsPerOrderHistory`;  
+INSERT INTO 
+	`ProductsPerOrderHistory`(ProductId, Quantity, OrderHistoryId)
+VALUES   
+	(161, 3, 3),(162, 3, 3),(163, 3, 3),(164, 3, 3),(165, 3, 3);   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+SELECT ord.OrderId,prod.ProductId,proper.Quantity,prod.UnityPrice,prod.Title,prod.PictureURL,ord.CreationDate,ord.StatusId FROM `Orders` as ord 
 INNER JOIN Clients ON ord.ClientId = Clients.ClientId 
 INNER JOIN OrderHistories AS ordHis ON ord.OrderId = ordHis.OrderId 
 INNER JOIN ProductsPerOrderHistory AS proper ON ordHis.OrderHistoryId = proper.OrderHistoryId 
 INNER JOIN Products AS prod ON proper.ProductId = prod.ProductId 
-WHERE Email="leonardo@gmail.com";
+WHERE Clients.Email="leonardo@gmail.com";
+
+SELECT ord.OrderId,prod.ProductId,proper.Quantity,prod.UnityPrice,prod.Title,prod.PictureURL,ord.CreationDate,ord.StatusId FROM Orders as ord   INNER JOIN Clients ON ord.ClientId = Clients.ClientId   INNER JOIN OrderHistories AS ordHis ON ord.OrderId = ordHis.OrderId   INNER JOIN ProductsPerOrderHistory AS proper ON ordHis.OrderHistoryId = proper.OrderHistoryId   INNER JOIN Products AS prod ON proper.ProductId = prod.ProductId WHERE Clients.Email='leonardo@gmail.com';
 
 CALL LogIn ("leonardo@gmail.com","Aa.@www1");
+
+
+select * from Clients;
+
 UPDATE Clients 
-SET Clients.Online = 0
-WHERE Password = SHA(CONCAT("Aa.@www1",",","leonardo@gmail.com"));
+SET Clients.Password = SHA(CONCAT("Aa@www1",",","leonardo@gmail.com"))
+WHERE ClientId = 7;
         
 SET SQL_SAFE_UPDATES = 0;
 

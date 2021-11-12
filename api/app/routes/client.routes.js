@@ -20,6 +20,7 @@ module.exports = app => {
     app.post("/createClient", client.create);
     app.post("/logIn", client.logIn);
     app.get('/productos',client.find);
+    app.get('/ordenes/:email',client.findOrders);
     
     
 };
