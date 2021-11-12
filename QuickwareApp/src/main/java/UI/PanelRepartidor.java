@@ -27,9 +27,10 @@ public class PanelRepartidor extends javax.swing.JPanel {
         actualDealer = repartidor;
         nameField.setText(repartidor.name);
         phoneField.setText(repartidor.phoneNumber);
-        placaField.setText(repartidor.email);
-        placaField1.setText(repartidor.vehicleId);
+        correoField.setText(repartidor.email);
+        placaField.setText(repartidor.vehicleId);
         passField.setEchoChar('●');
+        
     }
 
     /**
@@ -47,10 +48,10 @@ public class PanelRepartidor extends javax.swing.JPanel {
         phoneField = new javax.swing.JTextField();
         EmailLabel = new javax.swing.JLabel();
         PlacaLabel1 = new javax.swing.JLabel();
-        placaField = new javax.swing.JTextField();
+        correoField = new javax.swing.JTextField();
         passField = new javax.swing.JPasswordField();
         showPass = new javax.swing.JToggleButton();
-        placaField1 = new javax.swing.JTextField();
+        placaField = new javax.swing.JTextField();
         PlacaLabel2 = new javax.swing.JLabel();
         changes = new javax.swing.JRadioButton();
         delete = new javax.swing.JRadioButton();
@@ -83,11 +84,11 @@ public class PanelRepartidor extends javax.swing.JPanel {
         PlacaLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         PlacaLabel1.setText("Password:");
 
-        placaField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        placaField.setPreferredSize(new java.awt.Dimension(6, 20));
-        placaField.addActionListener(new java.awt.event.ActionListener() {
+        correoField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        correoField.setPreferredSize(new java.awt.Dimension(6, 20));
+        correoField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                placaFieldActionPerformed(evt);
+                correoFieldActionPerformed(evt);
             }
         });
 
@@ -106,10 +107,10 @@ public class PanelRepartidor extends javax.swing.JPanel {
             }
         });
 
-        placaField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        placaField1.addActionListener(new java.awt.event.ActionListener() {
+        placaField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        placaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                placaField1ActionPerformed(evt);
+                placaFieldActionPerformed(evt);
             }
         });
 
@@ -135,7 +136,7 @@ public class PanelRepartidor extends javax.swing.JPanel {
                             .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(placaField, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                            .addComponent(correoField, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                             .addComponent(phoneField)
                             .addComponent(nameField)))
                     .addGroup(layout.createSequentialGroup()
@@ -145,7 +146,7 @@ public class PanelRepartidor extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PlacaLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(placaField1)))
+                        .addComponent(placaField)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(showPass, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -170,11 +171,11 @@ public class PanelRepartidor extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EmailLabel)
-                    .addComponent(placaField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(correoField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PlacaLabel2)
-                    .addComponent(placaField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(placaField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -197,9 +198,9 @@ public class PanelRepartidor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneFieldActionPerformed
 
-    private void placaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaFieldActionPerformed
+    private void correoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_placaFieldActionPerformed
+    }//GEN-LAST:event_correoFieldActionPerformed
 
     private void showPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPassActionPerformed
         show = !show;
@@ -217,9 +218,9 @@ public class PanelRepartidor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_passFieldActionPerformed
 
-    private void placaField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaField1ActionPerformed
+    private void placaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_placaField1ActionPerformed
+    }//GEN-LAST:event_placaFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -227,6 +228,7 @@ public class PanelRepartidor extends javax.swing.JPanel {
     private javax.swing.JLabel PlacaLabel1;
     private javax.swing.JLabel PlacaLabel2;
     private javax.swing.JRadioButton changes;
+    private javax.swing.JTextField correoField;
     private javax.swing.JRadioButton delete;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
@@ -234,7 +236,6 @@ public class PanelRepartidor extends javax.swing.JPanel {
     private javax.swing.JTextField phoneField;
     private javax.swing.JLabel phoneNumberLabel;
     private javax.swing.JTextField placaField;
-    private javax.swing.JTextField placaField1;
     private javax.swing.JToggleButton showPass;
     // End of variables declaration//GEN-END:variables
 }
