@@ -21,8 +21,8 @@ public class Repartidor {
             @JsonProperty("DealerId") Integer dealerId,
             @JsonProperty("Name") String name,
             @JsonProperty("Email") String email,
-            @JsonProperty("PhoneNumber") String vehicleId,
-            @JsonProperty("VehicleId") String phoneNumber
+            @JsonProperty("PhoneNumber") String phoneNumber,
+            @JsonProperty("VehicleId") String vehicleId
     ){
         this.id = dealerId;
         this.name = name;
