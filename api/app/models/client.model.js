@@ -34,9 +34,24 @@ Client.logIn = (email,pass, result) => {
       console.log(res);
       result(null,res[0]);  
     });
-};
+  };
 Client.find = (reque, result) => {
   sql.query('SELECT * FROM `Products` WHERE AvailableQuantity > 0',function (err, results, fields) {
+    // error will be an Error if one occurred during the query
+    // results will contain the results of the query
+    // fields will contain information about the returned results fields (if any)
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);     
+      return;
+    }
+    console.log(results);
+    result(null,results);    
+  });
+};
+
+Client.findOrders = (reque, result) => {
+  sql.query('SELECT ord.OrderId,prod.ProductId,proper.Quantity,prod.UnityPrice,prod.Title,prod.PictureURL FROM Orders as ord   INNER JOIN Clients ON ord.ClientId = Clients.ClientId   INNER JOIN OrderHistories AS ordHis ON ord.OrderId = ordHis.OrderId   INNER JOIN ProductsPerOrderHistory AS proper ON ordHis.OrderHistoryId = proper.OrderHistoryId   INNER JOIN Products AS prod ON proper.ProductId = prod.ProductId WHERE Email='+reque+';',function (err, results, fields) {
     // error will be an Error if one occurred during the query
     // results will contain the results of the query
     // fields will contain information about the returned results fields (if any)
