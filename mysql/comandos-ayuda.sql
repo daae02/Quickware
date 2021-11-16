@@ -6,16 +6,29 @@ delete from Clients WHERE ClientId < 7;
 select * from Products;
 
 select * from `Status`;
-INSERT INTO 
-	`Status`(Name)
-VALUES
-	("En despacho"),("Despachado"),("Entregado");
+
+delete from `Status`;
+delete from `Orders`;
+delete from `OrderHistories`;
+delete from `ProductsPerOrderHistory`;
+
+ALTER TABLE Status AUTO_INCREMENT = 1;
+ALTER TABLE Orders AUTO_INCREMENT = 1;
+ALTER TABLE OrderHistories AUTO_INCREMENT = 1;
+ALTER TABLE ProductsPerOrderHistory AUTO_INCREMENT = 1;
+
+select * from Clients;
+
+
+INSERT INTO Status(StatusId,Name)
+VALUES(0,"En espera"),(1,"Empacado"),(2,"Listo Para Despacho"),(3,"Despachado"),(4,"Entregado"),(5,"Cancelado");
     
 select * from `Orders`;   
+
 INSERT INTO 
 	`Orders`(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice, Checksum)
 VALUES   
-	(7, 1, NOW(), DATE_ADD(NOW(), INTERVAL (RAND()*(10-3)+3) DAY), RAND()*(1000-3)+3,  MD5(CONCAT(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice)));
+	(7, 2, NOW(), DATE_ADD(NOW(), INTERVAL (RAND()*(10-3)+3) DAY), RAND()*(1000-3)+3,  MD5(CONCAT(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice)));
 
 select * from `OrderHistories`;  
 INSERT INTO 
@@ -33,7 +46,7 @@ VALUES
 INSERT INTO 
 	`Orders`(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice, Checksum)
 VALUES   
-	(7, 2, NOW(), DATE_ADD(NOW(), INTERVAL (RAND()*(10-3)+3) DAY), RAND()*(1000-3)+3,  MD5(CONCAT(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice)));
+	(7, 3, NOW(), DATE_ADD(NOW(), INTERVAL (RAND()*(10-3)+3) DAY), RAND()*(1000-3)+3,  MD5(CONCAT(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice)));
 
 select * from `OrderHistories`;  
 INSERT INTO 
@@ -43,7 +56,7 @@ VALUES
     
 select * from `ProductsPerOrderHistory`;  
 INSERT INTO 
-	`ProductsPerOrderHistory`(ProductId, Quantity, OrderHistoryId)
+	`ProductsPerOrderHistory`(ProductId, Quantity, OrderHistoryId)	
 VALUES   
 	(161, 1, 2),(162, 2, 2),(163, 3, 2),(164, 4, 2),(165, 5, 2);   
    
@@ -51,7 +64,7 @@ VALUES
 INSERT INTO 
 	`Orders`(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice, Checksum)
 VALUES   
-	(7, 3, NOW(), DATE_ADD(NOW(), INTERVAL (RAND()*(10-3)+3) DAY), RAND()*(1000-3)+3,  MD5(CONCAT(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice)));
+	(7, 5, NOW(), DATE_ADD(NOW(), INTERVAL (RAND()*(10-3)+3) DAY), RAND()*(1000-3)+3,  MD5(CONCAT(ClientId, StatusId, CreationDate, EstimatedDeliveryDate, TotalPrice)));
 
 select * from `OrderHistories`;  
 INSERT INTO 
@@ -90,9 +103,13 @@ CALL LogIn ("leonardo@gmail.com","Aa.@www1");
 select * from Clients;
 
 UPDATE Clients 
-SET Clients.Password = SHA(CONCAT("Aa@www1",",","leonardo@gmail.com"))
+SET Clients.Password = SHA(CONCAT("Aa@www11111",",","leonardo@gmail.com"))
 WHERE ClientId = 7;
         
+UPDATE Clients 
+SET Clients.EnterpriseName = "Aa@www11111"
+WHERE ClientId = 7;
+
 SET SQL_SAFE_UPDATES = 0;
 
 DROP PROCEDURE `LogIn`;
