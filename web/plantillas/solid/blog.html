@@ -24,7 +24,9 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
-
+  
+  <script type="text/javascript" src="lib\sweetalert2-11.1.9\package\dist\sweetalert2.all.min.js" >  
+  </script>
   <!-- =======================================================
     Template Name: Solid
     Template URL: https://templatemag.com/solid-bootstrap-business-template/
@@ -49,14 +51,25 @@
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li><a href="index.html">INICIO</a></li>
+          <li><a href="index.html">PEDIDOS</a></li>
           <li><a href="about.html">PRODUCTOS</a></li>
-          <li><a href="contact.html">CONTACTO</a></li>
-          <li class="dropdown">
+          <li><a href="contact.html">CONTACTO</a></li>  
+
+          <li id="bye" style="display:none" class="dropdown"> 
+            <a id="name_user" href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+              <i class="fa fa-user fa-fw"></i> Leo <b class="caret"></b></a>
+            <ul class="dropdown-menu">     
+              <li onclick="return cerrar_ses();">
+                <a href="index.html"><i class="fa fa-sign-out fa-fw"></i> ʕ•́ᴥ•̀ʔっ</a>
+              </li>
+            </ul>
+          </li>  
+
+          <li id="opcion" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">OPCIONES <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="blog.html">INICIAR SESIÓN</a></li>
-              <li><a href="single-post.html">REGISTRARSE</a></li>
+              <li><a id="iniciar_ses" href="blog.html">INICIAR SESIÓN</a></li>
+              <li><a id="regist" href="single-post.html">REGISTRARSE</a></li>
             </ul>
           </li>
         </ul>
@@ -89,7 +102,7 @@
       <form id="form1"
             class="contact-form"
             accept-charset="UTF-8" 
-            onsubmit="return inicio_ses()">
+            onsubmit="return inicio_ses();">
 
             <div class="form-group">
               <input type="email" name="email" class="form-control" id="email" placeholder="Correo electrónico" data-rule="email" data-msg="Please enter a valid email">
@@ -286,7 +299,7 @@
   <script type="text/javascript" >
     function show_msj2(){
       Swal.fire({
-          title: '¿Quieres Registrarte?',
+          title: '¿Quieres Iniciar Sesión?',
           showCancelButton: false,
           confirmButtonText: 'Si',
           cancelButtonText: 'No',
@@ -295,7 +308,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             Swal.fire('Inicio Sesión!', '', '')
-            document.getElementById('name').value = "";    
+            document.getElementById('email').value = "";    
             document.getElementById('password').value = "";
           } else if (result.isDenied) {
             Swal.fire('No Inicio Sesión!', '', '')
@@ -317,8 +330,8 @@
       return false;
     }
 
-    //Mínimo ocho y máximo 10 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial:
-    if (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$/.test(password1) == false){
+    //Máximo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial:
+    if (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#@$_-]).{4,8}$/.test(password1) == false){
       Swal.fire({
       icon: 'error',
       title: 'ERROR',
@@ -328,7 +341,7 @@
       return false;
     }
 
-    if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(email1) == false){
+    if (/^\w+([\.-]?\\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})$/.test(email1) == false){
       Swal.fire({
       icon: 'error',
       title: 'ERROR',
@@ -343,11 +356,9 @@
           type: 'POST',
           url: 'http://localhost:3000/logIn',
           data: JSON.stringify (
-            {      
-              name : document.getElementById('name').value,
-              PhoneNumber: document.getElementById('PhoneNumber').value,
-              Email: document.getElementById('Email').value,
-              EnterpriseName: document.getElementById('EnterpriseName').value
+            {
+              email: document.getElementById('email').value,
+              password: document.getElementById('password').value
             }),
           success: function (response) {
             chek = 1;
@@ -360,16 +371,42 @@
           contentType: "application/json",
           dataType: 'json'
         });
+
+        localStorage.store_email = email1;       
+
+        if(localStorage.store_email != ""){
+          document.getElementById("opcion").style.display = "none";  
+          document.getElementById("bye").style.display = "block";  
+          document.getElementById("name_user").innerHTML = '<i class="fa fa-user fa-fw"></i>'+localStorage.store_email+'<b class="caret"></b>'; 
+        }else{          
+          document.getElementById("opcion").style.display = "block";          
+          document.getElementById("bye").style.display = "none"; 
+          document.getElementById("name_user").textContent = ""; 
+        }
+
         if (chek == 0){
           return false;
         }
-        sessionStorage.setItem('store_email', email1);
-        //MínimosessionStorage.getItem('store_email');
-        //document.getElementById("Button").disabled = true;
-        
         return true;
   
     }
   </script>
+
+<script type="text/javascript">  
+  if(localStorage.store_email != ""){
+    document.getElementById("opcion").style.display = "none";  
+    document.getElementById("bye").style.display = "block";  
+    document.getElementById("name_user").innerHTML = '<i class="fa fa-user fa-fw"></i>'+localStorage.store_email+'<b class="caret"></b>'; 
+  }else{          
+    document.getElementById("opcion").style.display = "block";          
+    document.getElementById("bye").style.display = "none"; 
+    document.getElementById("name_user").textContent = ""; 
+  }
+  function cerrar_ses(){
+    localStorage.store_email = "";
+    return;
+  }
+</script>
+
 </body>
 </html>

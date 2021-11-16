@@ -42,6 +42,7 @@
 <body>
 
 
+  <!-- Fixed navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -55,62 +56,71 @@
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li ><a href="index.html">INICIO</a></li>
+          <li><a href="index.html">PEDIDOS</a></li>
           <li><a href="about.html">PRODUCTOS</a></li>
-          <li><a href="contact.html">CONTACTO</a></li>
-          <li class="dropdown">
+          <li><a href="contact.html">CONTACTO</a></li>  
+
+          <li id="bye" style="display:none" class="dropdown"> 
+            <a id="name_user" href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+              <i class="fa fa-user fa-fw"></i> Leo <b class="caret"></b></a>
+            <ul class="dropdown-menu">     
+              <li onclick="return cerrar_ses();">
+                <a href="index.html"><i class="fa fa-sign-out fa-fw"></i> ʕ•́ᴥ•̀ʔっ</a>
+              </li>
+            </ul>
+          </li>  
+
+          <li id="opcion" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">OPCIONES <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="blog.html">INICIAR SESIÓN</a></li>
-              <li><a href="single-post.html">REGISTRARSE</a></li>
+              <li><a id="iniciar_ses" href="blog.html">INICIAR SESIÓN</a></li>
+              <li><a id="regist" href="single-post.html">REGISTRARSE</a></li>
             </ul>
           </li>
         </ul>
       </div>
+      <!--/.nav-collapse -->
     </div>
   </div>
 
 
 
-   
-   <div class="my-fixed-item" >
+  <div id="blue">
+    <div class="container">
+      <div class="row">
+        <h3 id ="titulo_ped" class="text-center">PEDIDOS</h3>
+      </div>
+      <!-- /row -->
+    </div>
+    <!-- /container -->
+  </div>
+
+
+   <div id="todo_carr_div" class="my-fixed-item" >
     <div class="row">
-      <img src="img/carr.png" alt="" width="50px" height="50px">
-      
+      <img src="img/carr.png" alt="" width="50px" height="50px">      
       <ul id="carrito" class="text-left">
-        <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 300&dollar; 1 x martillo</li>-->
       </ul>
-      <div style="width: 90%; height: 200px; overflow-y: scroll;">
-        <div class="he-wrap tpl6">
-          <div class="he-view">
-            <div class="bg a0" data-animate="fadeIn">
-              <a style="padding-top: 1px;" type="button" class="btn btn-success" href="#"  onclick="return false;" ><i>+</i></a>
-              <a style="padding-top: 1px;" type="button" class="btn btn-warning" href="#"  onclick="return false;" ><i>-</i></a>              
-              <a style="padding-top: 1px;" type="button" class="btn btn-danger" href="#"  onclick="return false;" ><i>0</i></a>              
-            </div>
-          </div>
-          <li>300&dollar; 1 x martillo</li>
-        </div>      
+      <div style="width: 90%; max-height: 200px; overflow-y: scroll;">      
         <template id="tem_compra_item">
           <div class="he-wrap tpl6">
             <div class="he-view">
               <div class="bg a0" data-animate="fadeIn">
-                <a style="padding-top: 1px;" type="button" class="btn btn-success" href="#"  onclick="return false;" ><i>+</i></a>
-                <a style="padding-top: 1px;" type="button" class="btn btn-warning" href="#"  onclick="return false;" ><i>-</i></a>              
-                <a style="padding-top: 1px;" type="button" class="btn btn-danger" href="#"  onclick="return false;" ><i>0</i></a>              
+                <a style="padding-top: 1px;" type="button" class="btn btn-success" href="#"  onclick="agregar_pro_car(this.id,this.name);" ><i>+</i></a>
+                <a style="padding-top: 1px;" type="button" class="btn btn-warning" href="#"  onclick="restar_pro_car(this.id,this.name);" ><i>-</i></a>              
+                <a style="padding-top: 1px;" type="button" class="btn btn-danger" href="#"  onclick="borrar_pro_car(this.id,this.name);;" ><i>0</i></a>              
               </div>
             </div>
-            <li>{{UnityPrice}}*{{Quantity}}&dollar; {{Quantity}} x Title</li>
+            <li>{{TotalPrice}}&dollar; {{Quantity}} x Title</li>
           </div>      
           </template>
       </div>    
-      <p class="text-center">Total: <span id="total">300  </span>&dollar;</p>
+      <p class="text-center">Total: <span id="total">0</span>&dollar;</p>
         <button id="boton-pedir" enable class="btn btn-success" class="text-center">Pedir</button>
     </div>
 </div>
 
-
-  <div class="container mtb">
+  <div id="productos_tien" class="container mtb">
     <div class="row centered"> 
         <template id="template1">
           <div class="col-lg-3 col-md-3 col-sm-3">
@@ -118,24 +128,19 @@
               <img src="" alt="" width="150" height="150">
               <div class="he-view">
                 <div class="bg a0" data-animate="fadeIn">
-                  <h3 class="a1" data-animate="fadeInDown">{{UnityPrice}}</h3>
-                  <a href="#" class="dmbutton a2" onclick="return false;" data-animate="fadeInUp"><i>+</i></a>
-                  <a href="#" class="dmbutton a2" data-animate="fadeInUp"><i>-</i></a>
+                  <h3 class="a1" data-animate="fadeInDown">{{Title}}</h3>
+                  <a href="#" class="dmbutton a2" onclick="agregar_pro_car(this.id,this.name);" data-animate="fadeInUp"><i>+</i></a>
+                  <a href="#" class="dmbutton a2" onclick="restar_pro_car(this.id,this.name);" data-animate="fadeInUp"><i>-</i></a>
                 </div>
               </div>
             </div>
           <h4>{{UnityPrice}}</h4>
           <h5 class="ctitle">lo {{Title}}</h5>
+          <p>{{Description}}</p>
           </div>         
-          </template>
-          
-      </div>
-      
+          </template>          
+      </div>      
     </div>
-
-
-
-
     
   </div> 
 
@@ -163,7 +168,7 @@ var cardTemplate = Handlebars.compile($("#template1").html());
 $.getJSON('http://localhost:3000/productos', function(data) {     
         var cards = data;
         $.each(cards, function(index, card) {  
-            console.log(card);
+            //console.log(card);
             var plantilla = document.getElementById('template1');
             clone = plantilla.content.cloneNode(true);
             fields = clone.querySelectorAll('h3');
@@ -172,18 +177,166 @@ $.getJSON('http://localhost:3000/productos', function(data) {
             fields[0].textContent = '$'+card.UnityPrice;
             fields = clone.querySelectorAll('h5');
             fields[0].textContent = card.Title;     
+            fields = clone.querySelectorAll('p');
+            fields[0].textContent = card.Description;     
             fields = clone.querySelectorAll('img');
             fields[0].src = card.PictureURL;
             fields[0].width = "150";
             fields[0].height = "150";
             fields[0].alt = "";
-            plantilla.parentNode.appendChild(clone);
             
+            fields = clone.querySelectorAll('a');
+            fields[0].id = card.ProductId;
+            fields[0].name = card.UnityPrice;
+            fields[0].href = "#";
+            fields[0].class = "dmbutton a2";            
+
+            fields[1].id = card.ProductId;
+            fields[1].name = card.UnityPrice;
+            fields[1].href = "#";
+            fields[1].class = "dmbutton a2";      
+
+            plantilla.parentNode.appendChild(clone);
+            matr_car.push([card.ProductId,0,0,card.Title,card.UnityPrice]);
             $(".cards").append(cardTemplate(card)); 
         });
     });
 
 </script>
+
+
+<script type="text/javascript">
+    //Matriz del carrito
+    //  [ [ProductId,Cantidad,Monto,Title,Precio_Unitario] ]  
+    
+    document.getElementById("todo_carr_div").style.display = "none";
+    let matr_car = [];
+    
+    let total_carr = 0;
+    let total_carr_aux = 0;
+    let existe = 0;
+    let price = 0;
+    let cantidad = 1;
+    let nombre = "";
+    let id_productos = 0;
+
+    function mos_carr(){
+      if(total_carr > 0){
+        document.getElementById("todo_carr_div").style.display = "block";
+      }else{
+        document.getElementById("todo_carr_div").style.display = "none";
+      }
+    }
+
+    function ver_id_prod(element, index, array) { 
+      if(element[0] == id_productos){
+        existe = 1;
+        element[1] += 1;
+        cantidad = element[1];            
+        total_carr += price;
+        element[2] += price;
+        price = element[2];
+        nombre = element[3];  
+      }      
+    }
+
+    //----------------------------------------- Funciones de los productos
+    function agregar_pro_car(id_producto , uny_price){  
+      price = parseInt(uny_price);
+      id_productos = id_producto;      
+      matr_car.forEach(ver_id_prod);
+      if (cantidad == 1){
+        var plantilla = document.getElementById('tem_compra_item');
+        clone = plantilla.content.cloneNode(true);
+        fields = clone.querySelectorAll('li');
+        fields[0].id = id_producto+uny_price;    
+        fields[0].textContent = price+"$ "+cantidad+" x "+nombre;
+        fields = clone.querySelectorAll('a');
+        fields[0].id = id_producto;
+        fields[0].name = uny_price;        
+        fields[1].id = id_producto;
+        fields[1].name = uny_price;        
+        fields[2].id = id_producto;
+        fields[2].name = uny_price;
+
+        plantilla.parentNode.appendChild(clone);
+      }         
+      if (cantidad > 1){
+        fields = document.getElementById(id_producto+uny_price);
+        fields.textContent = price+"$ "+cantidad+" x "+nombre;
+      }   
+
+      fields = document.getElementById("total");
+      fields.textContent = total_carr;
+      mos_carr();
+      existe = 0;
+      price = 0;
+      cantidad = 0;
+      nombre = "";
+      id_productos = 0; 
+    }
+
+    function res_id_prod(element, index, array) {   
+      if(element[0] == id_productos){
+        if(element[1] > 0){          
+          existe = 1;
+          element[1] -= 1;
+          cantidad = element[1];  
+          total_carr -= price;
+
+          element[2] -= price;
+          price = element[2];
+          nombre = element[3];  
+        }
+      }
+    }
+
+    function restar_pro_car(id_producto , uny_price){ 
+      price = parseInt(uny_price);
+      id_productos = id_producto;      
+      matr_car.forEach(res_id_prod);    
+      if (existe == 1)  {
+        var item = document.getElementById(id_producto+uny_price);
+        if (cantidad == 0){
+          item.parentNode.removeChild(item);
+        }         
+        if (cantidad >= 1){
+          fields = document.getElementById(id_producto+uny_price);
+          fields.textContent = price+"$ "+cantidad+" x "+nombre;        
+        }                  
+        
+        fields = document.getElementById("total");
+        fields.textContent = total_carr;
+      }
+      mos_carr();
+      existe = 0;
+      price = 0;
+      cantidad = 0;
+      nombre = "";
+      id_productos = 0; 
+    }
+
+    function borr_id_prod(element, index, array) {  
+      if(element[0] == id_productos){          
+        total_carr -= element[2];   
+        element[2] = 0;         
+        element[1] = 0;   
+      }
+    }    
+    function borrar_pro_car(id_producto , uny_price){ 
+      price = parseInt(uny_price);
+      id_productos = id_producto;      
+      matr_car.forEach(borr_id_prod);     
+      var item = document.getElementById(id_producto+uny_price);
+      item.parentNode.removeChild(item); 
+      fields = document.getElementById("total");
+      fields.textContent = total_carr;
+      mos_carr();
+      existe = 0;
+      price = 0;
+      id_productos = 0;   
+    }
+  </script>
 
 
   <!-- *****************************************************************************************************************
@@ -235,7 +388,30 @@ $.getJSON('http://localhost:3000/productos', function(data) {
   <script src="lib/hover/hoverdir.js"></script>
   <script src="lib/hover/hoverex.min.js"></script>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js">  
+  </script>
+
+
+<script type="text/javascript">  
+    if(localStorage.store_email != ""){
+      document.getElementById("opcion").style.display = "none";  
+      document.getElementById("bye").style.display = "block";  
+      document.getElementById("name_user").innerHTML = '<i class="fa fa-user fa-fw"></i>'+localStorage.store_email+'<b class="caret"></b>'; 
+      document.getElementById("titulo_ped").textContent = "Productos";     
+      document.getElementById("productos_tien").style.display = "block";   
+      
+    }else{          
+      document.getElementById("opcion").style.display = "block";          
+      document.getElementById("bye").style.display = "none"; 
+      document.getElementById("name_user").textContent = ""; 
+      document.getElementById("titulo_ped").textContent = "¡ No se Inicio Sesión !";   
+      document.getElementById("productos_tien").style.display = "none";      
+    }
+    function cerrar_ses(){
+      localStorage.store_email = "";
+      return;
+    }
+</script>
 
 </body>
 </html>

@@ -49,14 +49,25 @@
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li><a href="index.html">INICIO</a></li>
+          <li><a href="index.html">PEDIDOS</a></li>
           <li><a href="about.html">PRODUCTOS</a></li>
-          <li><a href="contact.html">CONTACTO</a></li>
-          <li class="dropdown">
+          <li><a href="contact.html">CONTACTO</a></li>  
+
+          <li id="bye" style="display:none" class="dropdown"> 
+            <a id="name_user" href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+              <i class="fa fa-user fa-fw"></i> Leo <b class="caret"></b></a>
+            <ul class="dropdown-menu">     
+              <li onclick="return cerrar_ses();">
+                <a href="index.html"><i class="fa fa-sign-out fa-fw"></i> ʕ•́ᴥ•̀ʔっ</a>
+              </li>
+            </ul>
+          </li>  
+
+          <li id="opcion" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">OPCIONES <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="blog.html">INICIAR SESIÓN</a></li>
-              <li><a href="single-post.html">REGISTRARSE</a></li>
+              <li><a id="iniciar_ses" href="blog.html">INICIAR SESIÓN</a></li>
+              <li><a id="regist" href="single-post.html">REGISTRARSE</a></li>
             </ul>
           </li>
         </ul>
@@ -190,6 +201,22 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+
+  <script type="text/javascript">  
+    if(localStorage.store_email != ""){
+      document.getElementById("opcion").style.display = "none";  
+      document.getElementById("bye").style.display = "block";  
+      document.getElementById("name_user").innerHTML = '<i class="fa fa-user fa-fw"></i>'+localStorage.store_email+'<b class="caret"></b>'; 
+    }else{          
+      document.getElementById("opcion").style.display = "block";          
+      document.getElementById("bye").style.display = "none"; 
+      document.getElementById("name_user").textContent = ""; 
+    }
+    function cerrar_ses(){
+      localStorage.store_email = "";
+      return;
+    }
+</script>
 
 </body>
 </html>
