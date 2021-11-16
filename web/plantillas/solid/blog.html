@@ -47,13 +47,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-        <a class="navbar-brand" href="index.html">Quickware Distribution</a>
+        <a class="navbar-brand" href="blog.html">Quickware Distribution</a>
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <ul class="nav navbar-nav">
-          <li><a href="index.html">PEDIDOS</a></li>
-          <li><a href="about.html">PRODUCTOS</a></li>
-          <li><a href="contact.html">CONTACTO</a></li>  
+          <li id="bye2"><a href="index.html">PEDIDOS</a></li>
+          <li id="bye3"><a href="about.html">PRODUCTOS</a></li>
 
           <li id="bye" style="display:none" class="dropdown"> 
             <a id="name_user" href="#" class="dropdown-toggle" data-toggle="dropdown"> 
@@ -377,10 +376,14 @@
         if(localStorage.store_email != ""){
           document.getElementById("opcion").style.display = "none";  
           document.getElementById("bye").style.display = "block";  
+          document.getElementById("bye2").style.display = "block"; 
+          document.getElementById("bye3").style.display = "block"; 
           document.getElementById("name_user").innerHTML = '<i class="fa fa-user fa-fw"></i>'+localStorage.store_email+'<b class="caret"></b>'; 
         }else{          
           document.getElementById("opcion").style.display = "block";          
           document.getElementById("bye").style.display = "none"; 
+          document.getElementById("bye2").style.display = "none"; 
+          document.getElementById("bye3").style.display = "none"; 
           document.getElementById("name_user").textContent = ""; 
         }
 
@@ -396,10 +399,14 @@
   if(localStorage.store_email != ""){
     document.getElementById("opcion").style.display = "none";  
     document.getElementById("bye").style.display = "block";  
+    document.getElementById("bye2").style.display = "block"; 
+    document.getElementById("bye3").style.display = "block"; 
     document.getElementById("name_user").innerHTML = '<i class="fa fa-user fa-fw"></i>'+localStorage.store_email+'<b class="caret"></b>'; 
   }else{          
     document.getElementById("opcion").style.display = "block";          
     document.getElementById("bye").style.display = "none"; 
+    document.getElementById("bye2").style.display = "none"; 
+    document.getElementById("bye3").style.display = "none"; 
     document.getElementById("name_user").textContent = ""; 
   }
   function cerrar_ses(){
