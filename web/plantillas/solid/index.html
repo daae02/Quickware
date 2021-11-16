@@ -220,10 +220,10 @@
     fields[1].id = "productos_boton_"+ord_n;
 
     fields = clone.querySelectorAll('h3');
-    if (card.StatusId < 3){
+    if (card.StatusId < 3 || card.StatusId == 7){
       fields[0].innerHTML = '<i class="material-icons dp48">lock_open</i> #'+ord_n+' '+card.CreationDate.slice(0, 10);
     }
-    else if (card.StatusId < 5){
+    else if (card.StatusId == 3 || card.StatusId ==  5){
       fields[0].innerHTML = '<i class="material-icons dp48">lock_outline</i> #'+ord_n+' '+card.CreationDate.slice(0, 10);
     }else{
       fields[0].innerHTML = '<i class="material-icons dp48">done_all</i> #'+ord_n+' '+card.CreationDate.slice(0, 10);
