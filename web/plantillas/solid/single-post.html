@@ -65,7 +65,7 @@
 
           <li id="opcion" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">OPCIONES <b class="caret"></b></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu">1
               <li><a id="iniciar_ses" href="blog.html">INICIAR SESIÓN</a></li>
               <li><a id="regist" href="single-post.html">REGISTRARSE</a></li>
             </ul>
@@ -369,7 +369,7 @@
     }
 
     //Máximo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial:
-    if (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#@$_-]).{4,8}$/.test(password1) == false){
+    if (/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#@$_-]).{8,}$/.test(password1) == false){
       Swal.fire({
       icon: 'error',
       title: 'ERROR',
