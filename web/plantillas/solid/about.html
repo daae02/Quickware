@@ -164,7 +164,7 @@ Handlebars.registerHelper('diamondRating', function(rating, outOf) {
 var cardTemplate = Handlebars.compile($("#template1").html());
 
 // cards
-$.getJSON('http://localhost:3000/productos', function(data) {     
+$.getJSON('http://25.7.170.231:3000/productos', function(data) {     
         var cards = data;
         $.each(cards, function(index, card) {  
             //console.log(card);
