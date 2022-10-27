@@ -35,7 +35,7 @@ public class Requester {
     public Repartidor[] requestRepartidores() throws MalformedURLException, ProtocolException, IOException, JSONException{
         ObjectMapper mapper = new ObjectMapper();
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet("http://localhost:3000/repartidores");
+            HttpGet request = new HttpGet("http://25.7.170.231:3000/repartidores");
             HttpResponse response = client.execute(request);  
             client.close();
             return mapper.readValue(response.getEntity().getContent(), Repartidor[].class);        
