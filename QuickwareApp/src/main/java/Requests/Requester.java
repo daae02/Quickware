@@ -45,7 +45,7 @@ public class Requester {
             ObjectMapper mapper = new ObjectMapper();
             String jsonInString = mapper.writeValueAsString(rep);
             CloseableHttpClient client = HttpClients.createDefault();
-            HttpPost httpPost = new HttpPost("http://localhost:3000/addRepartidor");
+            HttpPost httpPost = new HttpPost("http://25.7.170.231:3000/addRepartidor");
             httpPost.getRequestLine();
             httpPost.setHeader("Content-type", "application/json");
             httpPost.setEntity(new StringEntity(jsonInString));
