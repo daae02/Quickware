@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private  fun requestName(){
         val nombre : TextView = findViewById<TextView>(R.id.dealerName)
         val queue = Volley.newRequestQueue(this)
-        val url = "http://192.168.8.104:3000/randomDealer"
+        val url = "http://192.168.8.103:3000/randomDealer"
         val stringRequest = StringRequest(Request.Method.GET, url,
             Response.Listener<String> { response ->
                 // Display the first 500 characters of the response string.
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
     private  fun requestOrders(){
         val queue = Volley.newRequestQueue(this)
-        val url = "http://192.168.8.104:3000/orders"
+        val url = "http://192.168.8.103:3000/orders"
         val params= HashMap<String,String>()
         params["id"] = id!!
         val jsonObject = JSONObject(params as Map<*, *>)
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
     private  fun updateOrder(orderId: Int?){
         val queue = Volley.newRequestQueue(this)
-        val url = "http://192.168.8.104:3000/updateOrder"
+        val url = "http://192.168.8.103:3000/updateOrder"
         val params= HashMap<String,String>()
         params["id"] = orderId.toString()!!
         val jsonObject = JSONObject(params as Map<*, *>)
